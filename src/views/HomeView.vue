@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ContentContainer from '@/components/ContentContainer.vue'
+import { LucidePlus } from 'lucide-vue-next'
 import { NButton } from 'naive-ui'
-import { RouterLink } from 'vue-router'
 
 // const { data } = useQuery({
 //   queryKey: ['categories'],
@@ -23,15 +23,18 @@ import { RouterLink } from 'vue-router'
           os produtos desejados.
         </p>
       </div>
-      <n-button
-        class="rounded-full !bg-brand-light-pink gap-2 py-[10px] px-4 text-base !text-brand-pure-pink"
-        quaternary
-      >
-        <RouterLink to="/my-categories">
-          Criar categorias
-          <UIcon name="i-lucide:plus" class="w-4 h-4 text-brand-pure-pink" />
-        </RouterLink>
-      </n-button>
+
+      <RouterLink to="/my-categories" v-slot="{ navigate }">
+        <n-button
+          class="bg-brand-light-pink rounded-full text-brand-pure-pink !font-medium h-11 w-44"
+          quaternary
+          role="link"
+          @click="navigate"
+        >
+          Criar categoria
+          <LucidePlus class="w-4 h-4 ml-2" />
+        </n-button>
+      </RouterLink>
     </div>
   </ContentContainer>
 </template>
