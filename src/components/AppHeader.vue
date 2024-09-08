@@ -20,7 +20,7 @@ const props = defineProps({
   >
     <RouterLink
       to="/"
-      class="fixed flex w-6 h-6 items-center justify-center"
+      class="fixed flex w-8 h-8 items-center justify-center"
       v-if="props.hasGoBackButton"
     >
       <LucideArrowLeft class="text-brand-pure-pink h-4 w-4" />
