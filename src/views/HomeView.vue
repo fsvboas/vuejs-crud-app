@@ -3,13 +3,6 @@ import ContentContainer from '@/components/ContentContainer.vue'
 import GenericButton from '@/components/core/GenericButton.vue'
 import { LucidePlus } from 'lucide-vue-next'
 import { NIcon } from 'naive-ui'
-
-// const { data } = useQuery({
-//   queryKey: ['categories'],
-//   queryFn: () => getCategories()
-// })
-
-// const categories = data.value || []
 </script>
 
 <template>
