@@ -2,7 +2,7 @@
 import ContentContainer from '@/components/ContentContainer.vue'
 import CreateCategoryForm from '@/components/CreateCategoryForm.vue'
 import EmptyState from '@/components/EmptyState.vue'
-import InputCard from '@/components/InputCard.vue'
+import InputCard from '@/components/core/InputCard.vue'
 import { getCategories } from '@/services/get-categories'
 import { useQuery } from '@tanstack/vue-query'
 import { computed } from 'vue'
