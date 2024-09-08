@@ -5,8 +5,6 @@ import AppHeader from './components/AppHeader.vue'
 
 const route = useRoute()
 
-console.log(route.name)
-
 const headerTitle = computed(() =>
   route.name === 'home' || route.name === 'my-categories'
     ? 'Categorias'
