@@ -6,9 +6,10 @@ export default {
       colors: {
         'dark-blue': '#31436F',
         'greyscale-light-grey': '#DDE2EF',
-        'grayscale-pure-gray': '#586893',
+        'greyscale-pure-grey': '#586893',
         'greyscale-dark-grey': '#8693B4',
-        'brand-light-pink': '#FFE2EB',
+        'brand-extra-light-pink': '#FFE2EB',
+        'brand-light-pink': '#F24F82',
         'brand-pure-pink': '#DA3468'
       }
     }
