@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { postCategory } from '@/services/post-category'
-import type { CategoryType } from '@/types/category-type'
+import type { CategoryFormType } from '@/types/category-form-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem, NInput } from 'naive-ui'
 import { ref } from 'vue'
@@ -18,7 +18,7 @@ const { mutate: create, isPending: pendingCreateUser } = useMutation({
   }
 })
 
-const formModel = ref<CategoryType>({
+const formModel = ref<CategoryFormType>({
   name: ''
 })
 
