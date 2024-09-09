@@ -31,7 +31,7 @@ const handleSubmitForm = () => {
 <template>
   <n-form class="flex w-full h-11 space-x-2" :show-label="false">
     <!-- TO-DO: change the input border color -->
-    <n-form-item class="w-full" :show-feedback="false" path="category">
+    <n-form-item class="w-full" :show-feedback="false" path="create-category">
       <n-input
         placeholder="Crie uma categoria"
         round
