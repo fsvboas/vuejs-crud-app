@@ -7,7 +7,7 @@ import { NForm, NFormItem, NInput } from 'naive-ui'
 import { ref } from 'vue'
 import GenericButton from './core/GenericButton.vue'
 
-const { mutate: create, isPending: pendingCreateUser } = useMutation({
+const { mutate: create, isPending: pendingCreateCategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
     // TO-DO: TOAST NOTIFICATION
@@ -47,7 +47,7 @@ const handleSubmitForm = () => {
         color="#DA3468"
         class="w-20 h-full disabled:bg-greyscale-light-grey disabled:text-greyscale-dark-grey"
         @click="handleSubmitForm"
-        :loading="pendingCreateUser"
+        :loading="pendingCreateCategory"
       >
         Criar
       </GenericButton>
