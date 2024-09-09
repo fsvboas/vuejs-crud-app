@@ -2,30 +2,45 @@
 import type { CategoryType } from '@/types/category-type'
 import { Check, Ellipsis, X } from 'lucide-vue-next'
 import { NIcon, NInput } from 'naive-ui'
-import { ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import ActionMenu from '../ActionMenu.vue'
 import GenericButton from './GenericButton.vue'
 
 const props = defineProps<{
   category: CategoryType
 }>()
 
+const actionMenuRef = ref<HTMLElement | null>(null)
+const showActionMenu = ref<boolean>(false)
 const isEditMode = ref<boolean>(false)
 const inputValue = ref<string>(props?.category.name || '')
 
 const handleEditMode = () => {
-  // OPEN/CLOSE THE EDIT MENU
   isEditMode.value = !isEditMode.value
 }
 
-const submitChange = () => {
-  // TO-DO: SUBMIT CATEGORY NAME CHANGE (PATCH)
-  isEditMode.value = false
+const handleOpenActionMenu = () => {
+  showActionMenu.value = !showActionMenu.value
 }
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (actionMenuRef.value && !actionMenuRef.value.contains(event.target as Node)) {
+    showActionMenu.value = false
+  }
+}
+onMounted(() => {
+  nextTick(() => {
+    document.addEventListener('click', handleClickOutside)
+  })
+})
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
   <!-- TO-DO: CHANGE TEXT INPUT COLOR WHEN IN DISABLED STATE -->
-  <div class="relative items-center w-full">
+  <div class="relative items-center w-full" ref="actionMenuRef">
     <n-input
       :default-value="props.category.name"
       placeholder=""
@@ -39,27 +54,34 @@ const submitChange = () => {
         '!bg-[#F3F3F5] ': isEditMode === false
       }"
     />
+    <!-- Workaround to close ActionMenu component -->
+    <div
+      v-if="showActionMenu === true"
+      class="absolute inset-0 z-10 w-[91%]"
+      @click="handleOpenActionMenu"
+    />
+    <!-- ---------------------------------------- -->
     <GenericButton
       v-if="isEditMode === false"
       quaternary
       round
       class="absolute right-2 top-2 h-9 w-9 p-0"
-      @click="handleEditMode"
+      @click="handleOpenActionMenu"
     >
       <Ellipsis class="text-brand-pure-pink h-4 w-4" />
     </GenericButton>
-
     <div v-else class="flex space-x-2 absolute right-2 top-2">
       <GenericButton color="#FFE2EB" round class="h-9 w-9" @click="handleEditMode">
         <n-icon color="#DA3468" size="13">
           <X />
         </n-icon>
       </GenericButton>
-      <GenericButton color="#DA3468" round class="h-9 w-9" @click="submitChange">
+      <GenericButton color="#DA3468" round class="h-9 w-9">
         <n-icon color="#FFFFFF" size="13">
           <Check />
         </n-icon>
       </GenericButton>
     </div>
+    <ActionMenu v-show="showActionMenu" />
   </div>
 </template>
