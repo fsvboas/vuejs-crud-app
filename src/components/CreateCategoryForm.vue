@@ -39,7 +39,7 @@ const handleSubmitForm = () => {
         v-model:value="formModel.name"
       />
     </n-form-item>
-    <n-form-item class="h-full" :show-feedback="false">
+    <n-form-item class="h-full min-w-fit" :show-feedback="false">
       <GenericButton
         attr-type="submit"
         round
