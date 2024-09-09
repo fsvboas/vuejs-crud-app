@@ -2,7 +2,7 @@
 import ContentContainer from '@/components/ContentContainer.vue'
 import CreateCategoryForm from '@/components/CreateCategoryForm.vue'
 import EmptyState from '@/components/EmptyState.vue'
-import InputCard from '@/components/core/InputCard.vue'
+import UpdateCategoryForm from '@/components/UpdateCategoryForm.vue'
 import InputCardSkeletonPlaceholder from '@/components/skeletons/InputCardSkeletonPlaceholder.vue'
 import { getCategories } from '@/services/get-categories'
 import { useQuery } from '@tanstack/vue-query'
@@ -21,11 +21,10 @@ const categories = computed(() => data.value || [])
     <CreateCategoryForm />
     <div class="flex w-full justify-center my-4">
       <div class="w-full space-y-3" v-if="categories.length && !isLoading">
-        <InputCard
+        <UpdateCategoryForm
           v-for="category in categories"
-          :categoryId="category.id"
-          :categoryName="category.name"
           v-bind:key="category.id"
+          :category="category"
         />
       </div>
       <div class="w-full space-y-3" v-else-if="isLoading">
