@@ -23,6 +23,7 @@ const categories = computed(() => data.value || [])
       <div class="w-full space-y-3" v-if="categories.length && !isLoading">
         <InputCard
           v-for="category in categories"
+          :categoryId="category.id"
           :categoryName="category.name"
           v-bind:key="category.id"
         />

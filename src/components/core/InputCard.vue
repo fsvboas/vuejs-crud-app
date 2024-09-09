@@ -7,6 +7,7 @@ import ActionMenu from '../ActionMenu.vue'
 import GenericButton from './GenericButton.vue'
 
 const props = defineProps<{
+  categoryId: CategoryType['id']
   categoryName: CategoryType['name']
 }>()
 
@@ -81,6 +82,6 @@ onUnmounted(() => {
         </n-icon>
       </GenericButton>
     </div>
-    <ActionMenu v-show="showActionMenu" />
+    <ActionMenu v-show="showActionMenu" :category-id="props.categoryId" />
   </div>
 </template>
