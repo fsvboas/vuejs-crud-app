@@ -20,7 +20,11 @@ const categories = computed(() => data.value || [])
     <CreateCategoryForm />
     <div class="flex w-full justify-center my-4">
       <div class="w-full space-y-3" v-if="categories.length">
-        <InputCard :category="category" v-for="category in categories" v-bind:key="category.id" />
+        <InputCard
+          v-for="category in categories"
+          :categoryName="category.name"
+          v-bind:key="category.id"
+        />
       </div>
       <!-- TO-DO: PENDING (SKELETON PLACEHOLDER) -->
       <div v-else-if="isLoading === true">CARREGANDO</div>

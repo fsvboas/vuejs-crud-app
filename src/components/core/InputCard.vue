@@ -7,13 +7,13 @@ import ActionMenu from '../ActionMenu.vue'
 import GenericButton from './GenericButton.vue'
 
 const props = defineProps<{
-  category: CategoryType
+  categoryName: CategoryType['name']
 }>()
 
 const actionMenuRef = ref<HTMLElement | null>(null)
 const showActionMenu = ref<boolean>(false)
 const isEditMode = ref<boolean>(false)
-const inputValue = ref<string>(props?.category.name || '')
+const inputValue = ref<string>(props?.categoryName || '')
 
 const handleEditMode = () => {
   isEditMode.value = !isEditMode.value
@@ -42,7 +42,7 @@ onUnmounted(() => {
   <!-- TO-DO: CHANGE TEXT INPUT COLOR WHEN IN DISABLED STATE -->
   <div class="relative items-center w-full" ref="actionMenuRef">
     <n-input
-      :default-value="props.category.name"
+      :default-value="props.categoryName"
       placeholder=""
       maxlength="48"
       round
