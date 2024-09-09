@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex flex-row w-full h-16 bg-white items-center p-4 border-b-[0.5px] border-[#F3F3F5]"
+    class="fixed z-50 flex flex-row w-full h-16 bg-white items-center p-4 border-b-[0.5px] border-[#F3F3F5]"
   >
     <RouterLink
       to="/"

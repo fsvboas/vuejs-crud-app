@@ -19,6 +19,6 @@ const headerHasGoBackButton = computed(() => (route.name === 'home' ? false : tr
 <template>
   <div class="flex flex-col min-h-screen bg-white text-dark-blue font-medium">
     <AppHeader :title="headerTitle" :has-go-back-button="headerHasGoBackButton" />
-    <RouterView />
+    <RouterView class="pt-[84px]" />
   </div>
 </template>
