@@ -57,7 +57,7 @@ onUnmounted(() => {
     <!-- Workaround to close ActionMenu component -->
     <div
       v-if="showActionMenu === true"
-      class="absolute inset-0 z-10 w-[91%]"
+      class="absolute inset-0 z-10"
       @click="handleOpenActionMenu"
     />
     <!-- ---------------------------------------- -->
@@ -65,7 +65,7 @@ onUnmounted(() => {
       v-if="isEditMode === false"
       quaternary
       round
-      class="absolute right-2 top-2 h-9 w-9 p-0"
+      class="absolute right-2 top-2 h-9 w-9 p-0 z-40"
       @click="handleOpenActionMenu"
     >
       <Ellipsis class="text-brand-pure-pink h-4 w-4" />
