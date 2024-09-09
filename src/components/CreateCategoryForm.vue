@@ -12,6 +12,7 @@ const { mutate: create, isPending: pendingCreateCategory } = useMutation({
   onSuccess: () => {
     // TO-DO: TOAST NOTIFICATION
     queryClient.invalidateQueries({ queryKey: ['categories'] })
+    formModel.value.name = ''
   },
   onError: () => {
     // TO-DO: TOAST NOTIFICATION
