@@ -45,12 +45,11 @@ onUnmounted(() => {
       :default-value="props.categoryName"
       placeholder=""
       maxlength="48"
-      round
       :bordered="isEditMode === true"
       :v-model:value="inputValue"
       :disabled="isEditMode === false"
       :class="{
-        'text-base h-[52px] items-center bg-transparent': true,
+        'text-base h-[52px] items-center bg-transparent rounded-[14px]': true,
         '!bg-[#F3F3F5] ': isEditMode === false
       }"
     />
