@@ -33,9 +33,9 @@ const closeModal = () => {
 const { mutate: del, isPending: pendingDeleteCategory } = useMutation({
   mutationFn: deleteCategory,
   onSuccess: () => {
-    closeModal()
     // TO-DO: TOAST NOTIFICATION
     queryClient.invalidateQueries({ queryKey: ['categories'] })
+    closeModal()
   },
   onError: () => {
     // TO-DO: TOAST NOTIFICATION
