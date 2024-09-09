@@ -1,5 +1,5 @@
 export type CategoryType = {
-  id?: string
+  id: string
   createdAt?: string
   updatedAt?: string
   name: string
