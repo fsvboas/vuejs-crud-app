@@ -1,8 +1,25 @@
 <script setup lang="ts">
 import ContentContainer from '@/components/ContentContainer.vue'
 import GenericButton from '@/components/core/GenericButton.vue'
+import LinkCard from '@/components/LinkCard.vue'
+import LinkCardSkeletonPlaceholder from '@/components/skeletons/LinkCardSkeletonPlaceholder.vue'
+import { getCategories } from '@/services/get-categories'
+import { useQuery } from '@tanstack/vue-query'
 import { LucidePlus } from 'lucide-vue-next'
 import { NIcon } from 'naive-ui'
+import { computed } from 'vue'
+
+const { data, isLoading } = useQuery({
+  queryKey: ['categories'],
+  queryFn: getCategories
+})
+
+const categories = computed(() => data.value || [])
+
+const categoriesQuantity = categories.value.length
+
+const subcategoriesFilter = categories.value.filter((category) => Boolean(category.children))
+const subcategoriesQuantity = subcategoriesFilter.length
 </script>
 
 <template>
@@ -16,8 +33,12 @@ import { NIcon } from 'naive-ui'
         produtos desejados.
       </p>
     </div>
-
-    <RouterLink to="/my-categories" v-slot="{ navigate }" class="w-fit">
+    <RouterLink
+      to="/my-categories"
+      v-slot="{ navigate }"
+      class="w-fit"
+      v-if="!categories.length && !isLoading"
+    >
       <GenericButton
         round
         color="#FFE2EB"
@@ -32,5 +53,10 @@ import { NIcon } from 'naive-ui'
         </n-icon>
       </GenericButton>
     </RouterLink>
+    <div class="flex flex-col space-y-3" v-else-if="isLoading"><LinkCardSkeletonPlaceholder /></div>
+    <div class="flex flex-col space-y-3" v-else>
+      <LinkCard title="Categorias" :quantity="categoriesQuantity" link="/my-categories" />
+      <LinkCard title="Subcategorias" :quantity="subcategoriesQuantity" link="/my-subcategories" />
+    </div>
   </ContentContainer>
 </template>
