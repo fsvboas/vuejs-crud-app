@@ -14,7 +14,7 @@ const handleToggleAccordionOpen = () => {
 </script>
 
 <template>
-  <div class="border border-greyscale-light-grey rounded-2xl overflow-hidden">
+  <div class="border border-greyscale-light-grey rounded-2xl">
     <div
       class="flex items-center justify-between p-4 cursor-pointer bg-white hover:bg-greyscale-light-grey transition-colors duration-500"
       @click="handleToggleAccordionOpen"
