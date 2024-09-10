@@ -3,8 +3,8 @@ import type { CategoryType } from '@/types/category-type'
 import { Check, Ellipsis, X } from 'lucide-vue-next'
 import { NIcon, NInput } from 'naive-ui'
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
-import ActionMenu from '../ActionMenu.vue'
-import GenericButton from './GenericButton.vue'
+import ActionMenu from './ActionMenu.vue'
+import GenericButton from './core/GenericButton.vue'
 
 const props = defineProps<{
   category: CategoryType

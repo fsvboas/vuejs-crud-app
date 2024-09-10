@@ -4,7 +4,7 @@ import { patchCategory } from '@/services/patch-category'
 import type { CategoryType } from '@/types/category-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem } from 'naive-ui'
-import InputCard from './core/InputCard.vue'
+import InputCard from './InputCard.vue'
 
 const props = defineProps<{
   category: CategoryType
