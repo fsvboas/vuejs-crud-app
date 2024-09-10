@@ -22,7 +22,7 @@ const subcategoryIds = computed(() => hasSubcategories.value.map((category) => c
 
 const subcategoriesResults = useQueries({
   queries: subcategoryIds.value.map((parentCategoryId) => ({
-    queryKey: ['subcategories'],
+    queryKey: ['subcategories', parentCategoryId],
     queryFn: () => getCategories({ parentCategoryId })
   }))
 })
