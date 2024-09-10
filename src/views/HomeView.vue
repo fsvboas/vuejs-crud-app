@@ -25,9 +25,9 @@ const subcategoriesQuantity = subcategoriesFilter.length
 <template>
   <ContentContainer>
     <div class="mb-6">
-      <h3 class="text-xl leading-6 font-semibold mb-3 text-dark-blue">
+      <h2 class="text-xl leading-6 font-semibold mb-3 text-dark-blue">
         Organize seu catálogo com categorias e subcategorias
-      </h3>
+      </h2>
       <p class="leading-5 text-greyscale-pure-grey">
         Ao usar as categorias e subcategorias do catálogo, você ajuda seus clientes a encontrarem os
         produtos desejados.
