@@ -2,11 +2,12 @@ import { api } from '@/libs/axios/api'
 import type { CategoryType } from '@/types/category-type'
 
 interface PatchCategoryProps {
-  categoryId: CategoryType['id']
-  categoryName: CategoryType['name']
+  category: CategoryType
 }
 
-export const patchCategory = async ({ categoryId, categoryName }: PatchCategoryProps) => {
-  const { data } = await api.patch<CategoryType>(`/categories/${categoryId}`, categoryName)
+export const patchCategory = async ({ category }: PatchCategoryProps) => {
+  const { data } = await api.patch<CategoryType>(`/categories/${category?.id}`, {
+    name: category?.name
+  })
   return data
 }
