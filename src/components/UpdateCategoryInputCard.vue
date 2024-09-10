@@ -9,20 +9,23 @@ import GenericButton from './core/GenericButton.vue'
 const props = defineProps<{
   category: CategoryType
   pendingPatchCategory: boolean
+  isEditMode: boolean
+  inputReadOnlyState: boolean
 }>()
 
 const emit = defineEmits<{
   (event: 'submitForm', categoryName: CategoryType['name']): void
+  (event: 'updateEditMode', value: boolean): void
 }>()
 
 const actionMenuRef = ref<HTMLElement | null>(null)
 const showActionMenu = ref<boolean>(false)
-const isEditMode = ref<boolean>(false)
 const inputValue = ref<string>(props?.category.name || '')
 
 const handleEditMode = () => {
-  isEditMode.value = !isEditMode.value
   showActionMenu.value = false
+  emit('updateEditMode', !props.isEditMode)
+  inputValue.value = props.category.name
 }
 
 const handleOpenActionMenu = () => {
@@ -51,13 +54,14 @@ onUnmounted(() => {
       :default-value="props.category.name"
       placeholder=""
       maxlength="48"
-      :bordered="isEditMode === true"
+      :bordered="props.isEditMode === true"
       v-model:value="inputValue"
-      :disabled="isEditMode === false"
+      :disabled="props.isEditMode === false"
       :class="{
         'text-base h-[52px] items-center bg-transparent rounded-[14px]': true,
-        '!bg-[#F3F3F5] ': isEditMode === false
+        '!bg-[#F3F3F5] ': props.isEditMode === false
       }"
+      :readonly="props.inputReadOnlyState"
     />
     <!-- Workaround to close ActionMenu component -->
     <div
@@ -67,7 +71,7 @@ onUnmounted(() => {
     />
     <!-- ---------------------------------------- -->
     <GenericButton
-      v-if="isEditMode === false"
+      v-if="props.isEditMode === false"
       quaternary
       round
       class="absolute right-2 top-2 h-9 w-9 p-0 z-40"

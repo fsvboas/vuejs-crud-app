@@ -4,17 +4,22 @@ import { patchCategory } from '@/services/patch-category'
 import type { CategoryType } from '@/types/category-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem } from 'naive-ui'
+import { ref } from 'vue'
 import UpdateCategoryInputCard from './UpdateCategoryInputCard.vue'
 
 const props = defineProps<{
   category: CategoryType
 }>()
 
+const isEditMode = ref<boolean>(false)
+const inputReadOnlyMode = ref<boolean>(false)
+
 const { mutate: update, isPending: pendingPatchCategory } = useMutation({
   mutationFn: patchCategory,
   onSuccess: () => {
     // TO-DO: TOAST NOTIFICATION
     queryClient.invalidateQueries({ queryKey: ['categories'] })
+    isEditMode.value = false
   },
   onError: () => {
     // TO-DO: TOAST NOTIFICATION
@@ -22,11 +27,17 @@ const { mutate: update, isPending: pendingPatchCategory } = useMutation({
 })
 
 const handleSubmitForm = (categoryName: CategoryType['name']) => {
+  inputReadOnlyMode.value = true
   const payload = {
     id: props.category.id,
     name: categoryName
   } as CategoryType
   update({ category: payload })
+}
+
+const handleEditModeChange = (newValue: boolean) => {
+  inputReadOnlyMode.value = false
+  isEditMode.value = newValue
 }
 </script>
 
@@ -37,6 +48,9 @@ const handleSubmitForm = (categoryName: CategoryType['name']) => {
         :category="props.category"
         @submitForm="handleSubmitForm"
         :pendingPatchCategory="pendingPatchCategory"
+        :isEditMode="isEditMode"
+        @updateEditMode="handleEditModeChange"
+        :inputReadOnlyState="inputReadOnlyMode"
       />
     </n-form-item>
   </n-form>
