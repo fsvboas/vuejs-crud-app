@@ -14,6 +14,7 @@ const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
     // TO-DO: TOAST NOTIFICATION
+    queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
   },
   onError: () => {
