@@ -10,7 +10,7 @@ import { computed } from 'vue'
 
 const { data, isLoading } = useQuery({
   queryKey: ['categories'],
-  queryFn: getCategories
+  queryFn: () => getCategories({})
 })
 
 const categories = computed(() => data.value || [])
