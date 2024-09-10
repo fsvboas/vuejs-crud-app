@@ -35,6 +35,7 @@ const { mutate: del, isPending: pendingDeleteCategory } = useMutation({
   onSuccess: () => {
     // TO-DO: TOAST NOTIFICATION
     queryClient.invalidateQueries({ queryKey: ['categories'] })
+    queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     closeModal()
   },
   onError: () => {
