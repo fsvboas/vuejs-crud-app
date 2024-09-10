@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { patchCategory } from '@/services/patch-category'
-import type { CategoryFormType } from '@/types/category-form-type'
 import type { CategoryType } from '@/types/category-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem } from 'naive-ui'
-import { ref } from 'vue'
 import InputCard from './core/InputCard.vue'
 
 const props = defineProps<{
@@ -23,15 +21,23 @@ const { mutate: update, isPending: pendingPatchCategory } = useMutation({
   }
 })
 
-const formModel = ref<CategoryFormType>({
-  name: ''
-})
+const handleSubmitForm = (categoryName: CategoryType['name']) => {
+  const payload = {
+    id: props.category.id,
+    name: categoryName
+  } as CategoryType
+  update({ category: payload })
+}
 </script>
 
 <template>
   <n-form :show-label="false">
     <n-form-item class="w-full" :show-feedback="false" path="update-category">
-      <InputCard :categoryId="category.id" :categoryName="category.name" />
+      <InputCard
+        :category="props.category"
+        @submitForm="handleSubmitForm"
+        :pending="pendingPatchCategory"
+      />
     </n-form-item>
   </n-form>
 </template>

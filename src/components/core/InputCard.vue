@@ -7,17 +7,22 @@ import ActionMenu from '../ActionMenu.vue'
 import GenericButton from './GenericButton.vue'
 
 const props = defineProps<{
-  categoryId: CategoryType['id']
-  categoryName: CategoryType['name']
+  category: CategoryType
+  pending: boolean
+}>()
+
+const emit = defineEmits<{
+  (event: 'submitForm', categoryName: CategoryType['name']): void
 }>()
 
 const actionMenuRef = ref<HTMLElement | null>(null)
 const showActionMenu = ref<boolean>(false)
 const isEditMode = ref<boolean>(false)
-const inputValue = ref<string>(props?.categoryName || '')
+const inputValue = ref<string>(props?.category.name || '')
 
 const handleEditMode = () => {
   isEditMode.value = !isEditMode.value
+  showActionMenu.value = false
 }
 
 const handleOpenActionMenu = () => {
@@ -43,11 +48,11 @@ onUnmounted(() => {
   <!-- TO-DO: CHANGE TEXT INPUT COLOR WHEN IN DISABLED STATE -->
   <div class="relative items-center w-full" ref="actionMenuRef">
     <n-input
-      :default-value="props.categoryName"
+      :default-value="props.category.name"
       placeholder=""
       maxlength="48"
       :bordered="isEditMode === true"
-      :v-model:value="inputValue"
+      v-model:value="inputValue"
       :disabled="isEditMode === false"
       :class="{
         'text-base h-[52px] items-center bg-transparent rounded-[14px]': true,
@@ -76,12 +81,22 @@ onUnmounted(() => {
           <X />
         </n-icon>
       </GenericButton>
-      <GenericButton color="#DA3468" round class="h-9 w-9">
+      <GenericButton
+        color="#DA3468"
+        round
+        class="h-9 w-9"
+        @click="emit('submitForm', inputValue)"
+        :loading="pending"
+      >
         <n-icon color="#FFFFFF" size="13">
           <Check />
         </n-icon>
       </GenericButton>
     </div>
-    <ActionMenu v-show="showActionMenu" :category-id="props.categoryId" />
+    <ActionMenu
+      v-show="showActionMenu"
+      :category-id="props.category.id"
+      @editMode="handleEditMode"
+    />
   </div>
 </template>

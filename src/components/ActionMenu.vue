@@ -14,13 +14,21 @@ const showConfirmationDeleteModal = ref(false)
 
 const handleShowConfirmationDeleteModal = () =>
   (showConfirmationDeleteModal.value = !showConfirmationDeleteModal.value)
+
+const emit = defineEmits<{
+  (event: 'editMode'): void
+}>()
 </script>
 
 <template>
   <div
     class="bg-white w-36 h-fit rounded-xl py-2 border border-[#DDE2EF] space-y-2 absolute right-0 z-50"
   >
-    <GenericButton quaternary class="w-full h-full py-2 px-4 !justify-start">
+    <GenericButton
+      quaternary
+      class="w-full h-full py-2 px-4 !justify-start"
+      @click="emit('editMode')"
+    >
       <n-icon size="16">
         <Pencil color="#DA3468" />
       </n-icon>
