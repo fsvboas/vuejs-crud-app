@@ -4,7 +4,7 @@ import { patchCategory } from '@/services/patch-category'
 import type { CategoryType } from '@/types/category-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem } from 'naive-ui'
-import InputCard from './InputCard.vue'
+import UpdateCategoryInputCard from './UpdateCategoryInputCard.vue'
 
 const props = defineProps<{
   category: CategoryType
@@ -33,7 +33,7 @@ const handleSubmitForm = (categoryName: CategoryType['name']) => {
 <template>
   <n-form :show-label="false">
     <n-form-item class="w-full" :show-feedback="false" path="update-category">
-      <InputCard
+      <UpdateCategoryInputCard
         :category="props.category"
         @submitForm="handleSubmitForm"
         :pendingPatchCategory="pendingPatchCategory"

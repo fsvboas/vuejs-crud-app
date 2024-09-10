@@ -82,7 +82,7 @@ onUnmounted(() => {
         round
         class="h-9 w-9 disabled:bg-greyscale-light-grey disabled:!text-greyscale-dark-grey"
         @click="handleEditMode"
-        :disabled="pendingPatchCategory"
+        :disabled="props.pendingPatchCategory"
       >
         <n-icon size="13">
           <X />
@@ -91,11 +91,11 @@ onUnmounted(() => {
       <GenericButton
         color="#DA3468"
         round
-        :class="`${pendingPatchCategory ? 'pl-1' : 'pl-0'} h-9 w-9`"
+        :class="`${props.pendingPatchCategory ? 'pl-1' : 'pl-0'} h-9 w-9`"
         @click="emit('submitForm', inputValue)"
-        :loading="pendingPatchCategory"
+        :loading="props.pendingPatchCategory"
       >
-        <n-icon size="13" v-show="!pendingPatchCategory">
+        <n-icon size="13" v-show="!props.pendingPatchCategory">
           <Check class="text-white" />
         </n-icon>
       </GenericButton>
