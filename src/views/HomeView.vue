@@ -16,10 +16,11 @@ const { data, isLoading } = useQuery({
 
 const categories = computed(() => data.value || [])
 
-const categoriesQuantity = categories.value.length
-
-const subcategoriesFilter = categories.value.filter((category) => Boolean(category.children))
-const subcategoriesQuantity = subcategoriesFilter.length
+const categoriesQuantity = computed(() => categories.value.length)
+const subcategoriesFilter = computed(() =>
+  categories.value.filter((category) => category.hasChildren === true)
+)
+const subcategoriesQuantity = computed(() => subcategoriesFilter.value.length)
 </script>
 
 <template>
