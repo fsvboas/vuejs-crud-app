@@ -8,7 +8,7 @@ import GenericButton from './GenericButton.vue'
 
 const props = defineProps<{
   category: CategoryType
-  pending: boolean
+  pendingPatchCategory: boolean
 }>()
 
 const emit = defineEmits<{
@@ -76,20 +76,27 @@ onUnmounted(() => {
       <Ellipsis class="text-brand-pure-pink h-4 w-4" />
     </GenericButton>
     <div v-else class="flex space-x-2 absolute right-2 top-2">
-      <GenericButton color="#FFE2EB" round class="h-9 w-9" @click="handleEditMode">
-        <n-icon color="#DA3468" size="13">
+      <GenericButton
+        color="#FFE2EB"
+        text-color="#DA3468"
+        round
+        class="h-9 w-9 disabled:bg-greyscale-light-grey disabled:!text-greyscale-dark-grey"
+        @click="handleEditMode"
+        :disabled="pendingPatchCategory"
+      >
+        <n-icon size="13">
           <X />
         </n-icon>
       </GenericButton>
       <GenericButton
         color="#DA3468"
         round
-        class="h-9 w-9"
+        :class="`${pendingPatchCategory ? 'pl-1' : 'pl-0'} h-9 w-9`"
         @click="emit('submitForm', inputValue)"
-        :loading="pending"
+        :loading="pendingPatchCategory"
       >
-        <n-icon color="#FFFFFF" size="13">
-          <Check />
+        <n-icon size="13" v-show="!pendingPatchCategory">
+          <Check class="text-white" />
         </n-icon>
       </GenericButton>
     </div>

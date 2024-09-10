@@ -36,7 +36,7 @@ const handleSubmitForm = (categoryName: CategoryType['name']) => {
       <InputCard
         :category="props.category"
         @submitForm="handleSubmitForm"
-        :pending="pendingPatchCategory"
+        :pendingPatchCategory="pendingPatchCategory"
       />
     </n-form-item>
   </n-form>
