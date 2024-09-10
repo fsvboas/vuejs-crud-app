@@ -16,7 +16,7 @@ const handleToggleAccordionOpen = () => {
 <template>
   <div class="border border-greyscale-light-grey rounded-2xl">
     <div
-      class="flex items-center justify-between p-4 cursor-pointer bg-white hover:bg-greyscale-light-grey transition-colors duration-500"
+      class="flex items-center justify-between p-4 cursor-pointer bg-white hover:bg-greyscale-light-grey transition-colors duration-500 rounded-2xl"
       @click="handleToggleAccordionOpen"
     >
       <h2 class="text-base font-semibold">{{ props.title }}</h2>
