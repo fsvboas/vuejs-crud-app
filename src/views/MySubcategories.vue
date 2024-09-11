@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ContentContainer from '@/components/core/ContentContainer.vue'
-import Accordion from '@/components/core/GenericAccordion.vue'
+import GenericAccordion from '@/components/core/GenericAccordion.vue'
 import CreateSubcategoryForm from '@/components/CreateSubcategoryForm.vue'
 import InputCardSkeletonPlaceholder from '@/components/skeletons/InputCardSkeletonPlaceholder.vue'
 import UpdateCategoryForm from '@/components/UpdateCategoryForm.vue'
@@ -50,14 +50,18 @@ const subcategoriesFilter = (parentId: CategoryType['id']) => {
       Adicione as subcategorias abaixo das categorias pai
     </h2>
     <div class="w-full space-y-3" v-if="!isLoadingCategoriesData && !subcategoriesIsLoading">
-      <Accordion v-for="category in categories" v-bind:key="category.id" :title="category.name">
+      <GenericAccordion
+        v-for="category in categories"
+        v-bind:key="category.id"
+        :title="category.name"
+      >
         <CreateSubcategoryForm :parent-id="category.id" />
         <UpdateCategoryForm
           v-for="subcategory in subcategoriesFilter(category.id)"
           v-bind:key="subcategory?.id"
           :category="subcategory"
         />
-      </Accordion>
+      </GenericAccordion>
     </div>
     <div class="w-full space-y-3" v-else>
       <InputCardSkeletonPlaceholder />
