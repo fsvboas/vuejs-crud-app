@@ -4,11 +4,15 @@ import { postCategory } from '@/services/post-category'
 import type { CategoryType } from '@/types/category-type'
 import { useMutation } from '@tanstack/vue-query'
 import { NForm, NFormItem } from 'naive-ui'
+import { ref } from 'vue'
 import AddCategoryInputCard from './AddCategoryInputCard.vue'
 
 const props = defineProps<{
   parentId: CategoryType['id']
 }>()
+
+const isInputActive = ref<boolean>(false)
+const inputReadOnlyMode = ref<boolean>(false)
 
 const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
   mutationFn: postCategory,
@@ -16,6 +20,7 @@ const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
     // TO-DO: TOAST NOTIFICATION
     queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
+    isInputActive.value = false
   },
   onError: () => {
     // TO-DO: TOAST NOTIFICATION
@@ -23,12 +28,18 @@ const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
 })
 
 const handleSubmitForm = (categoryName: CategoryType['name']) => {
+  inputReadOnlyMode.value = true
   create({
     name: categoryName,
     parent: {
       id: props.parentId
     }
   })
+}
+
+const handleInputActiveState = (newValue: boolean) => {
+  inputReadOnlyMode.value = false
+  isInputActive.value = newValue
 }
 </script>
 
@@ -39,6 +50,9 @@ const handleSubmitForm = (categoryName: CategoryType['name']) => {
       <AddCategoryInputCard
         @submitForm="handleSubmitForm"
         :pendingCreateCategory="pendingCreateSubcategory"
+        :isInputActive="isInputActive"
+        @updateInputActiveState="handleInputActiveState"
+        :inputReadOnlyState="inputReadOnlyMode"
       />
     </n-form-item>
   </n-form>

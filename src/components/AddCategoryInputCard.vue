@@ -7,23 +7,35 @@ import GenericButton from './core/GenericButton.vue'
 
 const props = defineProps<{
   pendingCreateCategory: boolean
+  isInputActive: boolean
+  inputReadOnlyState: boolean
 }>()
 
 const emit = defineEmits<{
   (event: 'submitForm', categoryName: CategoryType['name']): void
+  (event: 'updateInputActiveState', value: boolean): void
 }>()
 
 const actionMenuRef = ref<HTMLElement | null>(null)
-const isInputActive = ref<boolean>(false)
-const inputValue = ref<string>('Adicionar subcategoria')
+const inputValue = ref<string>('Adicionar uma categoria')
 
 const handleInputActive = () => {
-  isInputActive.value = !isInputActive.value
-  if (isInputActive.value === true) {
-    inputValue.value = ''
+  emit('updateInputActiveState', !props.isInputActive)
+
+  // workaround to reset input
+  if (!props.isInputActive) {
+    return (inputValue.value = '')
   } else {
-    inputValue.value = 'Adicionar subcategoria'
+    return (inputValue.value = 'Adicionar uma categoria')
   }
+}
+
+const handleSubmitValue = () => {
+  emit('submitForm', inputValue.value)
+  // workaround to reset input
+  setTimeout(() => {
+    inputValue.value = 'Adicionar uma categoria'
+  }, 1500)
 }
 </script>
 
@@ -40,6 +52,7 @@ const handleInputActive = () => {
         'text-base h-[52px] items-center bg-transparent rounded-[14px]': true,
         '!bg-[#F3F3F5] ': isInputActive === false
       }"
+      :readonly="props.inputReadOnlyState"
     />
     <GenericButton
       v-if="isInputActive === false"
@@ -67,7 +80,7 @@ const handleInputActive = () => {
         color="#DA3468"
         round
         :class="`${props.pendingCreateCategory ? 'pl-1' : 'pl-0'} h-9 w-9`"
-        @click="emit('submitForm', inputValue)"
+        @click="handleSubmitValue"
         :loading="props.pendingCreateCategory"
       >
         <n-icon size="13" v-show="!props.pendingCreateCategory">
