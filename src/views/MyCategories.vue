@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ContentContainer from '@/components/core/ContentContainer.vue'
 import CreateCategoryForm from '@/components/CreateCategoryForm.vue'
-import EmptyState from '@/components/EmptyState.vue'
+import HomeEmptyState from '@/components/HomeEmptyState.vue'
 import UpdateCategoryForm from '@/components/UpdateCategoryForm.vue'
 import InputCardSkeletonPlaceholder from '@/components/skeletons/InputCardSkeletonPlaceholder.vue'
 import { getCategories } from '@/services/get-categories'
@@ -30,7 +30,7 @@ const categories = computed(() => data.value || [])
       <div class="w-full space-y-3" v-else-if="isLoading">
         <InputCardSkeletonPlaceholder />
       </div>
-      <div v-else><EmptyState /></div>
+      <div v-else><HomeEmptyState /></div>
     </div>
   </ContentContainer>
 </template>
