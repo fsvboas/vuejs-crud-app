@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToast } from '@/hooks/use-vue-toast'
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { postCategory } from '@/services/post-category'
 import type { CategoryFormType } from '@/types/category-form-type'
@@ -7,15 +8,17 @@ import { NForm, NFormItem, NInput } from 'naive-ui'
 import { ref } from 'vue'
 import GenericButton from './core/GenericButton.vue'
 
+const { showSuccess, showError } = useToast()
+
 const { mutate: create, isPending: pendingCreateCategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
-    // TO-DO: TOAST NOTIFICATION
+    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     formModel.value.name = ''
   },
-  onError: () => {
-    // TO-DO: TOAST NOTIFICATION
+  onError: (error) => {
+    showError({ message: error.message, position: 'top' })
   }
 })
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToast } from '@/hooks/use-vue-toast'
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { postCategory } from '@/services/post-category'
 import type { CategoryType } from '@/types/category-type'
@@ -11,19 +12,21 @@ const props = defineProps<{
   parentId: CategoryType['id']
 }>()
 
+const { showSuccess, showError } = useToast()
+
 const isInputActive = ref<boolean>(false)
 const inputReadOnlyMode = ref<boolean>(false)
 
 const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
-    // TO-DO: TOAST NOTIFICATION
+    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top' })
     queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     isInputActive.value = false
   },
-  onError: () => {
-    // TO-DO: TOAST NOTIFICATION
+  onError: (error) => {
+    showError({ message: error.message, position: 'top' })
   }
 })
 

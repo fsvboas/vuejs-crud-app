@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import WarningSvg from '@/assets/svg/warning.svg'
+import { useToast } from '@/hooks/use-vue-toast'
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { deleteCategory } from '@/services/delete-category'
 import type { CategoryType } from '@/types/category-type'
@@ -17,6 +18,8 @@ const emit = defineEmits<{
   (event: 'update:showModal', value: boolean): void
 }>()
 
+const { showSuccess, showError } = useToast()
+
 const showModal = ref(props.showModal)
 
 watch(
@@ -33,13 +36,13 @@ const closeModal = () => {
 const { mutate: del, isPending: pendingDeleteCategory } = useMutation({
   mutationFn: deleteCategory,
   onSuccess: () => {
-    // TO-DO: TOAST NOTIFICATION
+    showSuccess({ message: 'Categoria deletada com sucesso!', position: 'top' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     closeModal()
   },
-  onError: () => {
-    // TO-DO: TOAST NOTIFICATION
+  onError: (error) => {
+    showError({ message: error.message, position: 'top' })
   }
 })
 

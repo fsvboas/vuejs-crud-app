@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToast } from '@/hooks/use-vue-toast'
 import { queryClient } from '@/libs/tanstack-query/query-client'
 import { patchCategory } from '@/services/patch-category'
 import type { CategoryType } from '@/types/category-type'
@@ -11,18 +12,20 @@ const props = defineProps<{
   category: CategoryType
 }>()
 
+const { showSuccess, showError } = useToast()
+
 const isEditMode = ref<boolean>(false)
 const inputReadOnlyMode = ref<boolean>(false)
 
 const { mutate: update, isPending: pendingPatchCategory } = useMutation({
   mutationFn: patchCategory,
   onSuccess: () => {
-    // TO-DO: TOAST NOTIFICATION
+    showSuccess({ message: 'Categoria atualizada com sucesso!', position: 'top' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     isEditMode.value = false
   },
-  onError: () => {
-    // TO-DO: TOAST NOTIFICATION
+  onError: (error) => {
+    showError({ message: error.message, position: 'top' })
   }
 })
 
