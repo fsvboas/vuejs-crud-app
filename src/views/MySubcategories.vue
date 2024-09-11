@@ -16,7 +16,7 @@ const { data: categoriesData, isLoading: isLoadingCategoriesData } = useQuery({
 
 const categories = computed(() => categoriesData.value || [])
 const hasSubcategories = computed(() =>
-  categories.value.filter((category) => category.hasChildren === true)
+  categories.value.filter((category) => computed(() => category.hasChildren === true))
 )
 const subcategoryIds = computed(() => hasSubcategories.value.map((category) => category.id))
 
