@@ -20,13 +20,13 @@ const inputReadOnlyMode = ref<boolean>(false)
 const { mutate: create, isPending: pendingCreateSubcategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
-    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top' })
+    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top-right' })
     queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     isInputActive.value = false
   },
   onError: (error) => {
-    showError({ message: error.message, position: 'top' })
+    showError({ message: error.message, position: 'top-right' })
   }
 })
 

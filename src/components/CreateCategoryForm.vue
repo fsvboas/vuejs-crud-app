@@ -13,12 +13,12 @@ const { showSuccess, showError } = useToast()
 const { mutate: create, isPending: pendingCreateCategory } = useMutation({
   mutationFn: postCategory,
   onSuccess: () => {
-    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top' })
+    showSuccess({ message: 'Categoria criada com sucesso!', position: 'top-right' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     formModel.value.name = ''
   },
   onError: (error) => {
-    showError({ message: error.message, position: 'top' })
+    showError({ message: error.message, position: 'top-right' })
   }
 })
 

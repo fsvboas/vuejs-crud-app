@@ -20,12 +20,12 @@ const inputReadOnlyMode = ref<boolean>(false)
 const { mutate: update, isPending: pendingPatchCategory } = useMutation({
   mutationFn: patchCategory,
   onSuccess: () => {
-    showSuccess({ message: 'Categoria atualizada com sucesso!', position: 'top' })
+    showSuccess({ message: 'Categoria atualizada com sucesso!', position: 'top-right' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     isEditMode.value = false
   },
   onError: (error) => {
-    showError({ message: error.message, position: 'top' })
+    showError({ message: error.message, position: 'top-right' })
   }
 })
 

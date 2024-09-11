@@ -36,13 +36,13 @@ const closeModal = () => {
 const { mutate: del, isPending: pendingDeleteCategory } = useMutation({
   mutationFn: deleteCategory,
   onSuccess: () => {
-    showSuccess({ message: 'Categoria deletada com sucesso!', position: 'top' })
+    showSuccess({ message: 'Categoria deletada com sucesso!', position: 'top-right' })
     queryClient.invalidateQueries({ queryKey: ['categories'] })
     queryClient.invalidateQueries({ queryKey: ['subcategories'] })
     closeModal()
   },
   onError: (error) => {
-    showError({ message: error.message, position: 'top' })
+    showError({ message: error.message, position: 'top-right' })
   }
 })
 
