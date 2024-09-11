@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ContentContainer from '@/components/ContentContainer.vue'
+import ContentContainer from '@/components/core/ContentContainer.vue'
 import GenericButton from '@/components/core/GenericButton.vue'
 import LinkCard from '@/components/LinkCard.vue'
 import LinkCardSkeletonPlaceholder from '@/components/skeletons/LinkCardSkeletonPlaceholder.vue'

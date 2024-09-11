@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ContentContainer from '@/components/ContentContainer.vue'
+import ContentContainer from '@/components/core/ContentContainer.vue'
 import CreateCategoryForm from '@/components/CreateCategoryForm.vue'
 import EmptyState from '@/components/EmptyState.vue'
 import UpdateCategoryForm from '@/components/UpdateCategoryForm.vue'

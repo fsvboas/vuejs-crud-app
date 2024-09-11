@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ContentContainer from '@/components/ContentContainer.vue'
+import ContentContainer from '@/components/core/ContentContainer.vue'
 import Accordion from '@/components/core/Accordion.vue'
 import CreateSubcategoryForm from '@/components/CreateSubcategoryForm.vue'
 import InputCardSkeletonPlaceholder from '@/components/skeletons/InputCardSkeletonPlaceholder.vue'
